@@ -12,6 +12,10 @@ Tiled refine/upscale for reference-latent edit models (FLUX.2 [klein] and simila
 |:---:|:---:|
 | ![base](examples/large-scale-base.jpg) | ![36mp result](examples/large-scale-36mp.jpg) |
 
+## Example workflow
+
+Drag [`workflows/ComfyUI-TiledUpscale.json`](workflows/ComfyUI-TiledUpscale.json) into ComfyUI for a working setup. Apart from this node pack it only uses core nodes, so there is nothing else to install.
+
 ## Nodes
 
 ### Tiled Upscale & Refine
