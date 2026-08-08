@@ -4,5 +4,9 @@ description = "Tiled upscale and refine for reference-latent edit models (FLUX.2
 version = "1.0.0"
 license = { text = "MIT" }
 
+[project.urls]
+Repository = "https://github.com/GianlucaMancuso/ComfyUI-TiledUpscale"
+
 [tool.comfy]
+PublisherId = "gianlucamancuso"
 DisplayName = "TiledUpscale"
