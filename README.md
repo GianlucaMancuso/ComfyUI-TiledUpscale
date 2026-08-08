@@ -6,6 +6,12 @@ Tiled refine/upscale for reference-latent edit models (FLUX.2 [klein] and simila
 |:---:|:---:|
 | ![before](examples/before.png) | ![after](examples/after.png) |
 
+**Large-scale example:** 1920x1088 (2.1MP) source upscaled to 7968x4512 (36MP) using `upscale_by=4.151`, `tile_size=2048`, `overlap=192` — 15 tiles.
+
+|  Before (1920x1088)  |  After (7968x4512, 36MP, 15 tiles)  |
+|:---:|:---:|
+| ![base](examples/large-scale-base.jpg) | ![36mp result](examples/large-scale-36mp.jpg) |
+
 ## Nodes
 
 ### Tiled Upscale & Refine
@@ -13,7 +19,7 @@ The all-in-one node. Give it a model, plain text conditioning, a VAE and an imag
 
 **Inputs**
 - `upscale_by`: resize the image before tiling (Lanczos). `1.0` = refine at current size.
-- `tile_size`: resolution each tile is regenerated at. Keep it at what the model is happiest with (1024 for klein).
+- `tile_size`: resolution each tile is regenerated at. Not capped — 1024 is just a safe default; tested working fine at 2048 on a 36MP / 15-tile image (see example below). Larger tiles mean fewer seams but slower, more VRAM-hungry per-tile calls.
 - `overlap` (px): how much neighbouring tiles share. Wider = smoother joins, more tiles, slower.
 - `feather` (0–1): fraction of the actual overlap used for the blend fade. `1.0` (default) fades across the whole shared region.
 - `seed` / `steps` / `cfg` / `sampler_name` / `scheduler` / `denoise`: as in a normal KSampler.
