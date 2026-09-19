@@ -1,7 +1,7 @@
 [project]
 name = "comfyui-tiledupscale"
-description = "Tiled upscale and refine for reference-latent edit models (FLUX.2 klein and similar): regenerate detail beyond the resolution a model can handle in one pass, without visible seams."
-version = "1.0.0"
+description = "Tiled upscale and refine for reference-latent edit models (FLUX.2 klein, Krea 2 and similar): regenerate detail beyond the resolution a model can handle in one pass, without visible seams."
+version = "1.1.0"
 license = { text = "MIT" }
 
 [project.urls]
