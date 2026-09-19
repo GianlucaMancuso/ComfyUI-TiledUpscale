@@ -29,9 +29,28 @@ The identity-edit LoRA's own release notes recommend generating at ~1–1.5MP an
 |:---:|:---:|
 | ![base](examples/large-scale-base.jpg) | ![36mp result](examples/large-scale-36mp.jpg) |
 
-## Example workflow
+### The same source through three models
 
-Drag [`workflows/ComfyUI-TiledUpscale.json`](workflows/ComfyUI-TiledUpscale.json) into ComfyUI for a working setup. Apart from this node pack it only uses core nodes, so there is nothing else to install.
+| Source | FLUX.2 klein |
+|:---:|:---:|
+| ![source](examples/krea2-source.jpg) | ![flux2 klein](examples/flux2-klein.jpg) |
+| **Krea 2 Turbo** (bf16) | **Krea 2 Raw** (int8 ConvRot) |
+| ![krea2 turbo](examples/krea2-turbo.jpg) | ![krea2 int8 convrot](examples/krea2-int8convrot.jpg) |
+
+How much of the original survives is mostly `denoise`, not the model. At `1.0` every tile is regenerated outright and the source only guides it through the reference, so the result can drift a long way from what you fed in. Lower values renoise the tile instead of replacing it, and around `0.7` to `0.85` brushwork, grain and palette stay put while detail still gets added. On a painting the difference is obvious; on a photograph it is easy to miss, because the model's prior already looks like the source.
+
+Models differ in how far they go for a given setting. FLUX.2 klein regenerates the most: at full denoise it tends to rebuild a painting as a photograph, keeping the composition but not the medium, so it wants a lower denoise than the Krea 2 stack for the same amount of restraint. Quantisation is not what decides this. The int8 ConvRot build behaves like the bf16 one; what changed between those two panels is the sampler budget, since Turbo is distilled for very few steps while Raw needs the usual twenty-something and a cfg above 1.
+
+## Example workflows
+
+Drag any of these into ComfyUI for a working setup:
+
+| Workflow | Stack |
+|---|---|
+| [`ComfyUI-TiledUpscale.json`](workflows/ComfyUI-TiledUpscale.json) | Core nodes only, nothing else to install |
+| [`TiledUpscale_flux2klein.json`](workflows/TiledUpscale_flux2klein.json) | FLUX.2 klein |
+| [`TiledUpscale_krea2-turbo.json`](workflows/TiledUpscale_krea2-turbo.json) | Krea 2 Turbo with the identity-edit LoRA |
+| [`TiledUpscale_krea2_int8convrot.json`](workflows/TiledUpscale_krea2_int8convrot.json) | Krea 2 Raw, int8 ConvRot quantised |
 
 ## Nodes
 
